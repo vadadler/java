@@ -1,5 +1,6 @@
 package puzzles;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 import datastructures.BinaryTreeNode;
@@ -36,8 +37,14 @@ public class Facebook {
 		
 		//2sum
 		int[] arr2 = {2,4,5,7,9,11};
-		int sum = 12;
-		fb.twoSum(arr2, sum);
+		int sum2 = 12;
+		fb.twoSum(arr2, sum2);
+		
+		//3sum
+		int[] arr3 = {8,2,1,5,7,8,11};
+		int sum3 = 13;
+		fb.threeSumBruteForce(arr2, sum3);
+
 	}
 	
 	/**
@@ -138,5 +145,33 @@ public class Facebook {
 		}
 		
 		System.out.println("2sum not found: array " + Arrays.toString(arr) + " to find sum=" + sum);
+	}
+	
+	
+	/**
+	 * Determine if any 3 integers in an array sum to S.
+	 * @param arr input array
+	 * @param sum sum
+	 * 
+	 * Brute force approach. Make 3 nested loops and iterate through to find solution.
+	 * Time complexity O(N^3)
+	 */
+	private void threeSumBruteForce(int[]arr, int sum) {
+		System.out.println("Find sum=" + sum + " in array " + Arrays.toString(arr));
+		int size = arr.length;
+		
+		for(int i = 0; i < size; i++) {
+			for(int j = i + 1; j < size; j++) {
+				for(int k = j + 1; k < size; k++) {
+					int currSum = arr[i] + arr[j] + arr[k];
+					if(currSum == sum) {
+						System.out.println("3sum found: " + arr[i] + "+" + arr[j] + "+" + arr[k] + "=" + sum);
+						return;
+					}
+				}
+			}
+		}
+		
+		System.out.println("3sum not found: array " + Arrays.toString(arr) + " to find sum=" + sum);
 	}
 }
