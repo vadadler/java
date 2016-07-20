@@ -42,8 +42,9 @@ public class Facebook {
 		
 		//3sum
 		int[] arr3 = {8,2,1,5,7,8,11};
-		int sum3 = 13;
-		fb.threeSumBruteForce(arr2, sum3);
+		int sum3 = 14;
+		fb.threeSumBruteForce(arr3, sum3);
+		fb.threeSumOptimal(arr3, sum3);
 
 	}
 	
@@ -156,7 +157,7 @@ public class Facebook {
 	 * Brute force approach. Make 3 nested loops and iterate through to find solution.
 	 * Time complexity O(N^3)
 	 */
-	private void threeSumBruteForce(int[]arr, int sum) {
+	private void threeSumBruteForce(int[] arr, int sum) {
 		System.out.println("Find sum=" + sum + " in array " + Arrays.toString(arr));
 		int size = arr.length;
 		
@@ -169,6 +170,46 @@ public class Facebook {
 						return;
 					}
 				}
+			}
+		}
+		
+		System.out.println("3sum not found: array " + Arrays.toString(arr) + " to find sum=" + sum);
+	}
+	
+	/**
+	 * Sort input array. Fix one number. Run 2sum algorithm for the other two.
+	 * Time complexity O(N^2)
+	 */
+	private void threeSumOptimal(int[] arr, int sum) {
+		System.out.println("Array before sorting: " + Arrays.toString(arr));
+		sorting.QuickSort qs = new sorting.QuickSort(arr);
+		qs.sort();
+		System.out.println("Array after sorting: " + Arrays.toString(arr));
+		
+		int size = arr.length;
+		boolean isFound = false;
+		for(int i = 0; i < size; i++) {
+			int tmpSum = sum - arr[i];
+			
+			int start = i + 1;
+			int end = size - 1;
+			while(start != end) {
+				int currSum = arr[start] + arr[end];
+				if(currSum < tmpSum) {
+					start++;
+				}
+				else if(currSum > tmpSum) {
+					end--;
+				}
+				else {
+					isFound = true;
+					break;
+				}
+			}
+			
+			if(isFound == true) {
+				System.out.println("3sum found: " + arr[i] + "+" + arr[start] + "+" + arr[end] + "=" + sum);
+				return;
 			}
 		}
 		
