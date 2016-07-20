@@ -120,6 +120,8 @@ public class Facebook {
 		int start = 0;
 		int end = arr.length - 1;
 		
+		System.out.println("Find sum=" + sum + " in array " + Arrays.toString(arr));
+		
 		while(start != end) {
 			int currSum = arr[start] + arr[end];
 			
@@ -131,8 +133,10 @@ public class Facebook {
 			}
 			else {
 				System.out.println("2sum found: " + arr[start] + "+" + arr[end] + "=" + sum);
-				break;
+				return;
 			}
 		}
+		
+		System.out.println("2sum not found: array " + Arrays.toString(arr) + " to find sum=" + sum);
 	}
 }
