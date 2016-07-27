@@ -15,7 +15,7 @@ public class MergeSort {
   int[] tmp;
   
   public static void main(String[] args) {
-  	int[] a = { 1,4,5,2,8,9};
+  	int[] a = {1,4,5,2,8,7};
   	
   	System.out.println("Array before sort: " + Arrays.toString(a));
   	
@@ -31,24 +31,38 @@ public class MergeSort {
   }
    
    public void sort() {
-  	 mergesort(0, arr.length - 1);
+  	 mergeSort(0, arr.length - 1);
    }
    
-   public void mergesort(int low, int high) {
+   /**
+    * Recursively call itself until there is only one element
+    * in array.
+    * @param low beginning of the array.
+    * @param high end of the array.
+    */
+   public void mergeSort(int low, int high) {
      // Check if low is smaller then high, if not then the array is sorted.
      if(low < high) {
        int middle = (low + high) / 2;
-       mergesort(low, middle);        // Sort left side.
-       mergesort(middle + 1, high);   // Sort right side.
+       mergeSort(low, middle);        // Sort left side.
+       mergeSort(middle + 1, high);   // Sort right side.
        merge(low, middle, high);      // Merge.
      }
    }
    
+   /**
+    * Do the merge.
+    * @param low beginning of the left array.
+    * @param middle end of left array.
+    * @param high end of right array.
+    */
    public void merge(int low, int middle, int high) {
      // Copy data into helper array.
      for(int i = low; i <= high; i++) {
        tmp[i] = arr[i];
      }
+     
+     System.out.println(Arrays.toString(tmp));
      
      int left = low;
      int right = middle + 1;
@@ -69,11 +83,16 @@ public class MergeSort {
      
      // Copy the rest of the left side.
      int remaining = middle - left;
-     for(int i = 0; i <= remaining; i++) {
-    	 arr[current + i] = tmp[left + 1];
+     for(int i = 0; i < remaining; i++) {
+    	 arr[current + i] = tmp[left + i];
      }
      
-     // There is no need to copy the rest of the right side.
-     // They are already there.
+     // Copy the rest of the right side.
+     remaining = high - middle -1;
+     //for(int i = 0; i < remaining; i++) {
+    //	 arr[current + i] = tmp[left + 1];
+     //}
+
+     //System.out.println(Arrays.toString(arr));
    }
 }
