@@ -17,7 +17,8 @@ public class BinarySearch {
 		
 		BinarySearch bs = new BinarySearch(size);
 		
-		System.out.println("Found? " + bs.search(0, size, 47));
+		System.out.println("Found? " + bs.search(0, size, value));
+		System.out.println("Index of  " + value + " is " + bs.searchIndex(0, size, value));
 	}
 	
 	private int[] list;
@@ -29,6 +30,10 @@ public class BinarySearch {
 		for(int i = 0; i < sizeList; i++) {
 			list[i] = i + 1; 
 		}
+	}
+	
+	public BinarySearch(int[] arr) {
+		list = arr;
 	}
 	
 	/**
@@ -43,6 +48,8 @@ public class BinarySearch {
 	 * @return was value found?
 	 */
 	private boolean search(int start, int end, int value) {
+		if(start == end) return false;
+		
 		int middle  = (end + start)/2;
 		
 		System.out.println(start + " " + middle + " " + end);
@@ -59,5 +66,38 @@ public class BinarySearch {
 		else {														// Not found.
 			return false;
 		}
+	}
+	
+	/**
+	 * Iteratively search for array index which value equals to search value.
+	 * @param start start index of the search.
+	 * @param end index of the search.
+	 * @param value to be found.
+	 * @return index of the searched value or -1 if value not found.
+	 */
+	private int searchIndex(int start, int end, int value) {
+		if(start == end) return -1;
+		
+		int middle = (end + start) / 2;
+		
+		if(value < list[middle]) {
+			return searchIndex(start, middle - 1, value);
+		}
+		else if(value > list[middle]) {
+			return searchIndex(middle + 1, end, value);
+		}
+		else if(value == list[middle]) {
+			return middle;
+		}
+		else {
+			return -1;
+		}
+	}
+	
+	/**
+	 * Find index of a value.
+	 */
+	public int findIndex(int value) {
+		return searchIndex(0, list.length, value);
 	}
 }
