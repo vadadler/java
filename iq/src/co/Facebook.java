@@ -1,4 +1,4 @@
-package puzzles;
+package co;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;

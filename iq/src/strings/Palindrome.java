@@ -6,6 +6,8 @@ import java.util.Stack;
 /**
  * I was asked today to write an algorithm checking if string 
  * was a palindrome. 
+ * 
+ * Asked by: Yelp
  *
  */
 public class Palindrome {

@@ -64,18 +64,39 @@ public class LinkedList {
     }
   }
   
-  // Reverse linked list.
-  public void reverse() {
-    Node current = head;
-    Node previous = null;
-    Node next = null;
-    while(current != null) {
-      next = current.next;
-      current.next = previous;
-      previous = current;
-      current = next;
-    }
-    head = previous;
+  /**
+   * Reverse linked list.
+   * 
+   * Asked by: Yelp
+   */  
+  public void reverseIterative() {
+  	Node n1 = head;
+  	Node n2 = n1.next;
+  	
+  	n1.next = null;
+  	while(n1 != null && n2 != null) {
+  		Node temp = n2.next;
+  		n2.next = n1;
+  		n1 = n2;
+  		n2 = temp;
+  	}
+  	
+  	head = n1;
+  }
+  
+  public Node reverseRecursive(Node n) {
+  	if(n == null || n.next == null) {
+  		head = n;
+  		return n;
+  	}
+  	
+  	Node n2 = n.next;
+  	n.next = null;
+  	
+  	Node n3 = reverseRecursive(n2);
+  	n2.next = n;
+  	
+  	return n3;
   }
   
   /**
@@ -232,10 +253,14 @@ class AppLinkedList {
     list.insert(list.new Node(6));
     list.print();
     
-    System.out.println("Reversed");
-    list.reverse();
+    System.out.println("Reversed iteratively");
+    list.reverseIterative();
     list.print();
-    
+
+    System.out.println("Reversed recursively");
+    list.reverseRecursive(list.head);
+    list.print();
+
     System.out.println("Deleted node " + 3);
     list.delete(3);
     list.print();
