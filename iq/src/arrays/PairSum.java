@@ -8,11 +8,11 @@ import java.util.HashMap;
  * pairs which sum up to a value.
  * 
  * Three possible solutions:
- * 	1. Brute force. 
- * 		a. Nested loops to check all possible combinations.
- * 		b. Using hash table to store elements as keys and 
- * 			 (sum - element) as value.
+ * 	1. Brute force. Nested loops to check all 
+ *     possible combinations.
  *  2. Sort array. Binary search for (sum - element).
+ *  3. Using HashTable to store elements as keys and 
+ * 		 (sum - element) as value.
  *
  */
 
@@ -27,7 +27,7 @@ public class PairSum {
 		System.out.println("Using nested loops");
 		ps.pairSumNestedLoops(a, sum);
 
-		System.out.println("Using hashmap trick");
+		System.out.println("Using hashmap");
 		ps.pairSumHashMapDiff(a, sum);
 
 		System.out.println("Using sorted array and binary search");
@@ -93,5 +93,5 @@ public class PairSum {
 				System.out.println("[" + arr[i] + "," + arr[index] + "] = " + sum);
 			}
 		}
-	}
+	}	
 }
