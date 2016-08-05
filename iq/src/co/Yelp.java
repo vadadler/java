@@ -31,12 +31,16 @@ public class Yelp {
 	 */
 	
 	/**
-	 * Question: How many bits in an Octal number.
+	 * Question: How many bits in an octal number.
 	 * Answer: Octal numbers are from 0 to 7 = 8 == 2 ^ 3 = 3 bits  
 	 */
 	
 	/**
 	 * How would you reverse a linked list?
+	 */
+	
+	/**
+	 * Invert a binary tree.
 	 */
 	
 	/**

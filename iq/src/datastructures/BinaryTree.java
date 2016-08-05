@@ -25,5 +25,27 @@ public class BinaryTree {
 		node3.right = node7;
 	}
 	
-	public BinaryTreeNode getRoot() { return root; }
+	public BinaryTreeNode invertBinaryTree(BinaryTreeNode root) {
+		if(root != null) {
+			invert(root);
+		}
+		
+		return root;
+	}
+	
+	private void invert(BinaryTreeNode node) {
+		BinaryTreeNode temp = node.left;
+		node.left = node.right;
+		node.right = temp;
+		
+		if(node.left != null) {
+			invert(node.left);
+		}
+		
+		if(node.right != null) {
+			invert(node.right);
+		}
+	}
+	
+ 	public BinaryTreeNode getRoot() { return root; }
 }
