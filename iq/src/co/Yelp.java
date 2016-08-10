@@ -47,6 +47,10 @@ public class Yelp {
 	 * Given a list l and an int k produce a list of distinct pairs that add up to k 
 	 */
 	
+	/**
+	 * Implement min stack. minPeek() would return minimun element of the stack.
+	 */
+	
 	public static void main(String[] args) {
 		
 	}

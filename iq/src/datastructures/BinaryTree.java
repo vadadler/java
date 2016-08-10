@@ -27,24 +27,28 @@ public class BinaryTree {
 	
 	public BinaryTreeNode invertBinaryTree(BinaryTreeNode root) {
 		if(root != null) {
-			invert(root);
+			invertRecursive(root);
 		}
 		
 		return root;
 	}
 	
-	private void invert(BinaryTreeNode node) {
+	private void invertRecursive(BinaryTreeNode node) {
 		BinaryTreeNode temp = node.left;
 		node.left = node.right;
 		node.right = temp;
 		
 		if(node.left != null) {
-			invert(node.left);
+			invertRecursive(node.left);
 		}
 		
 		if(node.right != null) {
-			invert(node.right);
+			invertRecursive(node.right);
 		}
+	}
+	
+	private void invertIterative(BinaryTreeNode root) {
+		
 	}
 	
  	public BinaryTreeNode getRoot() { return root; }
