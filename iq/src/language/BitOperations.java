@@ -48,7 +48,7 @@ public class BitOperations {
 			}
 		}
 		
-		System.out.println("Right shift by hand: " + value + ">>" + by + "=" + sb.toString());
+		System.out.println("Right shift by hand: " + value + ">>" + by + "=" + binString2int(sb.toString()));
 	}
 	
 	/**
@@ -114,8 +114,18 @@ public class BitOperations {
 		return sb.toString();
 	}
 	
+	/**
+	 * Convert binary string to integer.
+	 * 0100->4
+	 * @param binStr
+	 * @return
+	 */
 	private int binString2int(String binStr) {
 		int result = 0;
+		
+		for(int i = binStr.length() - 1, j = 0; i>= 0; i++) {
+			result += binStr.charAt(i) * Math.pow(2, j);
+		}
 		
 		return result;
 	}
