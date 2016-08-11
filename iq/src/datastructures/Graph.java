@@ -39,8 +39,8 @@ public class Graph {
     graph.addEdge(3, 7);
     graph.addEdge(7, 8);
     
-    //graph.dfs();
-    graph.bfs();
+    graph.dfs();
+    //graph.bfs();
   }
   
   public void addVertex(Vertex v) {
