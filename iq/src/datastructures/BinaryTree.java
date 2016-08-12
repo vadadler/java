@@ -3,7 +3,10 @@ package datastructures;
 public class BinaryTree {
 	private BinaryTreeNode root;
 	public static void main(String[] args) {
+		BinaryTree bt = new BinaryTree();
+		bt.buildTree();
 		
+		System.out.println("Min depth=" + bt.minDepth(bt.root));
 	}
 	
 	public void buildTree() {
@@ -61,7 +64,7 @@ public class BinaryTree {
  	 * @return
  	 */
  	private int minDepth(BinaryTreeNode root) {
- 		int depth = 0;
+ 		int depth = 1;
  		
  		if(root != null) {
  			java.util.Queue<BinaryTreeNode> currentLevel = new java.util.LinkedList<BinaryTreeNode>();
@@ -74,7 +77,7 @@ public class BinaryTree {
  				
  				// Reached leaf node.
  				if(node.left == null && node.right == null) {
- 					depth = currentLevel.size();
+ 					return depth;
  				}
  				else {
  					if(node.left != null) {
@@ -84,6 +87,12 @@ public class BinaryTree {
  					if(node.right != null) {
  						nextLevel.add(node.right);
  					}
+ 				}
+ 				
+ 				if(currentLevel.isEmpty() == true) {
+ 					currentLevel = nextLevel;
+ 					nextLevel = new java.util.LinkedList<BinaryTreeNode>();
+ 					depth++;
  				}
  			}
  			
