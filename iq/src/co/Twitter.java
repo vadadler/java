@@ -9,6 +9,11 @@ public class Twitter {
 	}
 	
 	/**
+	 * Given an MxN board and a list of words, write an algorithm that will find 
+	 * all the words on the board that are present in the dictionary.
+	 */
+	
+	/**
 	 * Mouse and cheese trap question: There is a grid, and mouse is in 
 	 * one coordinate. He has to reach the cheese. There are mousetraps 
 	 * and walls, means he mouse cannot go to those grids. Find the 

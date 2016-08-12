@@ -52,4 +52,43 @@ public class BinaryTree {
 	}
 	
  	public BinaryTreeNode getRoot() { return root; }
+ 	
+ 	
+ 	/**
+ 	 * Find minimum depth of a binary tree.
+ 	 * Classic BFS problem.
+ 	 * @param root
+ 	 * @return
+ 	 */
+ 	private int minDepth(BinaryTreeNode root) {
+ 		int depth = 0;
+ 		
+ 		if(root != null) {
+ 			java.util.Queue<BinaryTreeNode> currentLevel = new java.util.LinkedList<BinaryTreeNode>();
+ 			java.util.Queue<BinaryTreeNode> nextLevel = new java.util.LinkedList<BinaryTreeNode>();
+ 			
+ 			currentLevel.add(root);
+ 			
+ 			while(currentLevel.isEmpty() == false) {
+ 				BinaryTreeNode node = currentLevel.poll();
+ 				
+ 				// Reached leaf node.
+ 				if(node.left == null && node.right == null) {
+ 					depth = currentLevel.size();
+ 				}
+ 				else {
+ 					if(node.left != null) {
+ 						nextLevel.add(node.left);
+ 					}
+ 					
+ 					if(node.right != null) {
+ 						nextLevel.add(node.right);
+ 					}
+ 				}
+ 			}
+ 			
+ 		}
+ 		
+ 		return depth;
+ 	}
 }
