@@ -44,19 +44,26 @@ public class Twitter {
 		graph.addVertex(h);
 		graph.addVertex(i);
 
-		graph.addEdge(0, 0);
 		graph.addEdge(0, 1);
-		graph.addEdge(1, 1);
+		graph.addEdge(1, 0);
+		graph.addEdge(1, 2);
 		graph.addEdge(2, 1);
-		graph.addEdge(3, 1);
-		graph.addEdge(2, 2);
 		graph.addEdge(2, 3);
-		graph.addEdge(3, 3);
+		graph.addEdge(3, 2);
+		graph.addEdge(3, 4);
+		graph.addEdge(3, 5);
 		graph.addEdge(4, 3);
+		graph.addEdge(5, 3);
+		graph.addEdge(5, 6);
+		graph.addEdge(6, 5);
+		graph.addEdge(6, 7);
+		graph.addEdge(7, 6);
+		graph.addEdge(7, 8);
+		graph.addEdge(8, 7);
 		
 		graph.print();
 		
-		graph.findCheese("h");
+		graph.findCheese("H");
 	}
 	
 	/**
@@ -146,21 +153,22 @@ public class Twitter {
 			
 			// Lucky. The first cell contains cheese.
 			if(vertices[0].label.equals(cheese)) {
-				printPath(queue);
 				return;
 			}
 			
+			int v2;
 			while(queue.isEmpty() == false) {
-				int nextUnvisitedIndex = getUnvisitedVertex(queue.dequeu());
-				if(nextUnvisitedIndex >= 0) {
-					queue.enqueue(nextUnvisitedIndex);
-					vertices[nextUnvisitedIndex].isVisited = true;
-					
-					printVertex(nextUnvisitedIndex);
+				int v1 = queue.dequeu();
+				while((v2 = getUnvisitedVertex(v1)) >= 0) {
+					queue.enqueue(v2);
+					vertices[v2].isVisited = true;
+			
+					printVertex(v2);
 					
 					// Check is the cheese cell.
-					if(vertices[nextUnvisitedIndex].label.equals(cheese)) {
-						printPath(queue);
+					if(vertices[v2].label.equals(cheese)) {
+						System.out.println();
+						System.out.println("Found cheese in cell " + vertices[v2].label);
 						return;
 					}		
 				}
