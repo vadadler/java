@@ -123,3 +123,14 @@ In addition to implementing the processor interface, you should also write unit 
 producing the results expected of the specification.  Each unit test should instantiate and populate an `Order` and call
 your implementation and validate the results.
 
+## Design and implementation notes
+
+1. Due to the requirement for implementation of OrderProcessor interface to be reused by other applications it would make sense to have OrderProcessorImplementor designed as an abstract class. However in this particular case there is only one method defined in OrderProcessor interface. The purpose of abstract classes is to provide some behavior implementation which could be used by all subclasses.
+2. Based on the requirements for rules enforcement the following categories should be implemented: Tax, Reward, Shipping.
+3. OrderProcessImplementor (or its subclasses if it is implemented as abstract class) should have a list of rules (tax, reward, shipping etc.) These rules should be validated one by one to determine if order is valid. As well as handle rewards and shipping.
+4. There are 3 rules defined in the assignment. It makes sense to create an `interface Rule` with one method `boolean processRule(Order o)` There will be 3 different implementaions for each rule category type: Tax, Reward, Shipping.
+
+
+## TODO
+1. It would be a good idea to think about packaging. How to structure it. I would probably package by feature.
+2. Figure out how to implement unit tests.
