@@ -2,24 +2,30 @@ package datastructures;
 
 import java.util.HashSet;
 
-import datastructures.LinkedList.Node;
-
 public class LinkedList {
   Node head = null;
   Node tail = null;
   int size;
   
   public static void main(String[] args) {
-    AppLinkedList app = new AppLinkedList();
-    app.ceateList();
-    //app.delete(3);
+    LinkedList list = new LinkedList();
+    list.add(new Node(1));
+    list.add(new Node(2));
+    list.add(new Node(3));
+    list.add(new Node(4));
+   
+    list.print();
+    
+    list.head = list.deleteAtTail(list.head);
+    System.out.println("After deleted at the tail:");
+    list.print();
   }
   
   public int size() {
     return size;
   }
   
-  // Add to the end of the list.
+  // Add at the end of the list.
   public void add(Node n) {
     if(head == null) { 
       head = n; 
@@ -204,25 +210,54 @@ public class LinkedList {
     return false;
   }
   
-  public void print() {
-    Node n = head;
-    while(n.next != null) {
-      System.out.print(n.value + "->");
-      n = n.next;
-    }
-    System.out.println(n.value);
+  /**
+   * Given a singly-linked list, write a method to delete its last node and return the head.
+   * 1->2->3->4 => 1->2->3
+   */
+  private Node deleteAtTail(Node root) {
+  	if(root.next == null) {
+  		root = null;
+  		return null;
+  	}
+  	else {
+	  	Node n = root;
+	  	
+	
+	  	while(n.next.next != null) {
+	  		n = n.next;
+	  	}
+	  	
+	  	n.next = null;
+	  	return root;
+  	}
   }
   
-  class Node {
-    int value;
-    Node next;
-    
-    public Node(int v) {
-      value = v;
-      next = null;
-    }
+  public void print() {
+  	if(head == null) {
+  		System.out.println("NULL");
+  	}
+  	else {
+	    Node n = head;
+	    while(n.next != null) {
+	      System.out.print(n.value + "->");
+	      n = n.next;
+	    }
+	    System.out.println(n.value);
+	  }  
   }
 }
+
+class Node {
+  int value;
+  Node next;
+  
+  public Node(int v) {
+    value = v;
+    next = null;
+  }
+}
+
+/*
 
 class AppLinkedList {
   LinkedList list;
@@ -275,3 +310,4 @@ class AppLinkedList {
 
   }
 }
+*/
