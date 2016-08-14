@@ -7,7 +7,7 @@ public class Queue {
   LinkedList data = new LinkedList();
   
   public void enqueue(int value) {
-    data.insert(data.new Node(value));
+    //data.insert(data.new Node(value));
   }
   
   public int dequeue() {
