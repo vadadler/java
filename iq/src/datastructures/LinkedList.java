@@ -1,5 +1,6 @@
 package datastructures;
 
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class LinkedList {
@@ -13,8 +14,11 @@ public class LinkedList {
     list.add(new Node(2));
     list.add(new Node(3));
     list.add(new Node(4));
+    list.add(new Node(5));
    
     list.print();
+
+    System.out.println("Middle node is " + list.findMiddleNode(list.head).value);
     
     list.head = list.deleteAtTail(list.head);
     System.out.println("After deleted at the tail:");
@@ -62,7 +66,7 @@ public class LinkedList {
   }
   
   public Node deleteAtHead(Node head) {
-     return head.next;
+     return head == null ? null :head.next;
   }
   
   // Delete a node based on value.
@@ -76,6 +80,28 @@ public class LinkedList {
         tail = node;
       }
     }
+  }
+  
+  /**
+   * Given a Singly-Linked List, write a method - findMiddleNode that 
+   * finds and returns the middle node of the list in a single pass.
+   * 
+   * Examples:
+   * 1 ==> 1
+   * 1->2 ==> 1
+   * 1->2->3->4 ==> 2
+   * 1->2->3->4->5 ==> 3
+   */
+  public Node findMiddleNode(Node head) {
+     HashMap<Integer, Node> nodes = new HashMap<Integer, Node>();
+     Node node = head;
+     int i = 1;
+     while(node != null) {
+        nodes.put(i++, node);
+        node = node.next;
+     }
+     
+     return(nodes.get(i/2));
   }
   
   /**
@@ -230,7 +256,6 @@ public class LinkedList {
   	else {
 	  	Node n = root;
 	  	
-	
 	  	while(n.next.next != null) {
 	  		n = n.next;
 	  	}
