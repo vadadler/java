@@ -12,10 +12,12 @@ import java.util.Arrays;
  * 
  * which is {{1,2,3},{4,5,6},{7,8,9}} 
  * 
- * converted to {{7,8,9},{4,5,6},{1,2,3}}
+ * converted to   
+ * 
+ * {{3,2,1},{6,5,4},{9,8,7}}
  *
  */
-public class FlipHorizontally {
+public class FlipVertically {
    public static void main(String[] args) {
       int[][] m1 = {{1,2,3},{4,5,6},{7,8,9}};
       int[][] m2 = {{1,0,0},{0,0,1}};
@@ -23,18 +25,19 @@ public class FlipHorizontally {
       int[][] m4 = {{1},{}};
       
       System.out.println("Before flip");
-      printArray(m1);
-      flipHorizontallyInPlace(m1);
+      printArray(m3);
+      flipHorizontallyInPlace(m3);
       System.out.println("After flip");
-      printArray(m1);
+      printArray(m3);
    }
    
    private static void flipHorizontallyInPlace(int[][] m) {
-      for(int j = 0,  i = m.length - 1; i > 0 && i != j; i--, j++) {
-         int[] temp = new int[m[j].length];
-         temp = m[j];
-         m[j] = m[i];
-         m[i] = temp;
+      for(int[] a : m) {
+         for(int i = 0, j = a.length - 1; i < a.length - 1 && i != j; i++, j--) {
+            int tmp = a[i];
+            a[i] = a[j];
+            a[j] = tmp;
+         }
       }
    }
    
