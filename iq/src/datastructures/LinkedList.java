@@ -19,6 +19,10 @@ public class LinkedList {
     list.head = list.deleteAtTail(list.head);
     System.out.println("After deleted at the tail:");
     list.print();
+    
+    list.head = list.deleteAtHead(list.head);
+    System.out.println("After deleted at the head:");
+    list.print();
   }
   
   public int size() {
@@ -55,6 +59,10 @@ public class LinkedList {
       n = n.next;
       size--;
     }
+  }
+  
+  public Node deleteAtHead(Node head) {
+     return head.next;
   }
   
   // Delete a node based on value.
