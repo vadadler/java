@@ -37,8 +37,9 @@ public class Palindrome {
 		// Sanitize and lowercase.
 		str = str.replaceAll("\\W","").toLowerCase();
 		
-		for(int i = 0, j = str.length() - 1; i < str.length(); i++, j--) {
-			if(str.charAt(i) != str.charAt(j)) {
+		int length = str.length() - 1;
+		for(int i = 0; i < length/2; i++) {
+			if(str.charAt(i) != str.charAt(length - i)) {
 				return false;
 			}
 		}
