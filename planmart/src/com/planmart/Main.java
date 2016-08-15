@@ -31,7 +31,7 @@ public class Main {
 
     private static void Assert(boolean condition) {
         if (!condition) {
-            throw new InvalidStateException("Assertion failed");
+            //throw new InvalidStateException("Assertion failed");
         }
     }
 }
