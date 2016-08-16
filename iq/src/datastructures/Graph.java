@@ -7,8 +7,8 @@ public class Graph {
   private int count = 0;
   
   public static void main(String[] args) {
-    GraphApp app = new GraphApp();
-    Graph graph = app.makeGraph();
+     
+    Graph graph = new Graph();
     
     Vertex a = new Vertex('A');
     Vertex b = new Vertex('B');
@@ -30,6 +30,12 @@ public class Graph {
     graph.addVertex(h);
     graph.addVertex(i);
     
+    /*
+          A
+      B  C  D  E
+     F       H  
+    G         I   
+     */
     graph.addEdge(0, 1);
     graph.addEdge(0, 2);
     graph.addEdge(0, 3);
@@ -39,8 +45,13 @@ public class Graph {
     graph.addEdge(3, 7);
     graph.addEdge(7, 8);
     
+    System.out.println("DFS");
     graph.dfs();
-    //graph.bfs();
+
+    graph.resetGraph();
+
+    System.out.println("\nBFS");
+    graph.bfs();
   }
   
   public void addVertex(Vertex v) {
@@ -50,6 +61,15 @@ public class Graph {
   public void addEdge(int start, int end) {
     adjMatrix[start][end] = 1;
     adjMatrix[end][start] = 1;
+  }
+  
+  // Unvisit all nodes.
+  private void resetGraph() {
+     for(int i = 0; i < vertices.length; i++) {
+        if(vertices[i] != null) {
+           vertices[i].wasVisited = false;
+        }
+     }
   }
   
   public void dfs() {
@@ -111,13 +131,6 @@ public class Graph {
       System.out.println();
     }        
   }
-}
-
-class GraphApp {
-  public Graph makeGraph() {
-    Graph graph = new Graph();
-    return graph;
-  }  
 }
 
 class Vertex {
