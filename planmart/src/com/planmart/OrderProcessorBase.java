@@ -8,6 +8,6 @@ public abstract class OrderProcessorBase implements OrderProcessor {
    
    @Override
    public boolean processOrder(Order order) {
-      return true;
+      return true; 
    }
 }
