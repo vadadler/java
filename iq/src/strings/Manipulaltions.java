@@ -1,5 +1,6 @@
 package strings;
 
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 
 public class Manipulaltions {
@@ -92,5 +93,25 @@ public class Manipulaltions {
       }
       
       return sb.toString();
+   }
+   
+   /**
+    * Write a method that takes in an input String and returns true if all the characters 
+    * in the String are unique and false if there is even a single repeated character.
+    * The method should return true if the input is null or empty String.
+    */
+   private boolean areAllCharactersUnique(String str) {
+      if(str == null) return true;
+      
+      HashSet<Character> chars = new HashSet<Character>();
+      
+      for(char ch : str.toCharArray()) {
+         if(chars.contains(ch) == true) {
+            return false;
+         }
+         chars.add(ch);
+      }
+      
+      return true;
    }
 }
