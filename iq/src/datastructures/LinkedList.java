@@ -276,11 +276,16 @@ public class LinkedList {
    * Asked: Oracle
    */
   public Node deleteAtMiddle(Node head, int position) {
-     if (head == null) { return null; }
-     if (position == 1) { return head.next; }
-     Node result = new Node(head.value);
-     result.next = deleteAtMiddle(head.next, position - 1);
-     return result;  
+     if (head == null) { 
+        return null; 
+     }
+     else if (position == 1) { 
+        return head.next; 
+     }
+     else {
+        head.next = deleteAtMiddle(head.next, position - 1);
+        return head;
+     }
   }
   
   public void print() {
