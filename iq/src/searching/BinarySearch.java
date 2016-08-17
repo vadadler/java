@@ -19,6 +19,8 @@ public class BinarySearch {
 		
 		System.out.println("Found? " + bs.search(0, size, value));
 		System.out.println("Index of  " + value + " is " + bs.searchIndex(0, size, value));
+		
+		System.out.println("Found new way? " + bs.search(bs.list, value));
 	}
 	
 	private int[] list;
@@ -66,6 +68,32 @@ public class BinarySearch {
 		else {														// Not found.
 			return false;
 		}
+	}
+	
+	private boolean search(int[] arr, int v) {
+	   int length = arr.length;
+	   return search(0, length, arr, v);
+	}
+	
+	private boolean search(int start, int end, int[] arr, int v) {
+	   if(start == end) {
+	      return false;
+	   }
+	   
+	   int middle = (start + end) / 2;
+	   
+	   if(v < arr[middle]) {
+	      return search(0, middle - 1, arr, v);
+	   }
+	   else if(v > arr[middle]) {
+	      return search(middle + 1, end, arr, v);
+	   }
+	   else if(v == arr[middle]) {
+	      return true;
+	   }
+	   else {
+	      return false;
+	   }
 	}
 	
 	/**
