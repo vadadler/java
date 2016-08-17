@@ -14,12 +14,12 @@ public class LinkedList {
     list.add(new Node(2));
     list.add(new Node(3));
     list.add(new Node(4));
-    list.add(new Node(5));
+    //list.add(new Node(5));
    
     list.print();
 
     System.out.println("Middle node is " + list.findMiddleNode(list.head).value);
-    
+    /*
     list.head = list.deleteAtTail(list.head);
     System.out.println("After deleted at the tail:");
     list.print();
@@ -27,6 +27,11 @@ public class LinkedList {
     list.head = list.deleteAtHead(list.head);
     System.out.println("After deleted at the head:");
     list.print();
+    */
+    list.head = list.deleteAtMiddle(list.head, 3);
+    System.out.println("After deleted in the middle:");
+    list.print();
+
   }
   
   public int size() {
@@ -249,20 +254,33 @@ public class LinkedList {
    * 1->2->3->4 => 1->2->3
    */
   private Node deleteAtTail(Node root) {
-  	if(root.next == null) {
-  		root = null;
-  		return null;
-  	}
-  	else {
-	  	Node n = root;
+     if(root.next == null) {
+        root = null;
+  		  return null;
+  	   }
+  	   else {
+  	      Node n = root;
 	  	
-	  	while(n.next.next != null) {
-	  		n = n.next;
-	  	}
+  	      while(n.next.next != null) {
+  	         n = n.next;
+  	      }
 	  	
-	  	n.next = null;
-	  	return root;
-  	}
+  	      n.next = null;
+  	      return root;
+  	   }
+  }
+  
+  /**
+   * Delete the Node at a Particular Position.
+   * 
+   * Asked: Oracle
+   */
+  public Node deleteAtMiddle(Node head, int position) {
+     if (head == null) { return null; }
+     if (position == 1) { return head.next; }
+     Node result = new Node(head.value);
+     result.next = deleteAtMiddle(head.next, position - 1);
+     return result;  
   }
   
   public void print() {
