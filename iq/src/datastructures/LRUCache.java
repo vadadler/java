@@ -5,6 +5,10 @@ import java.util.HashMap;
 /**
  * Design and implement a data structure for Least Recently Used (LRU) cache. It should 
  * support the following operations: get and set.
+ *
+ * LRU is a cache that holds strong references to a limited number of values. Each time a value is accessed, it is
+ * moved to the head of a queue. When a value is added to a full cache, the value at the end of that queue is evicted.
+ *
  * get(key) - Get the value (will always be positive) of the key if the key 
  *            exists in the cache, otherwise return -1.
  * set(key, value) - Set or insert the value if the key is not already present. When the 
@@ -17,13 +21,31 @@ import java.util.HashMap;
  */
 public class LRUCache {
    // Maximum values to stored in cache.
-   public static final int MAX_CAPACITY = 10;
+   public static final int MAX_CAPACITY = 4;
 
    HashMap<Integer, Node> mValues = new HashMap<Integer, Node>();
+   HashMap<Character, NodeChar> mValuesChar = new HashMap<Character, NodeChar>();
+
    Node mHead=null;
    Node mEnd=null;
 
-   public void setHead(Node n) {
+   NodeChar mHeadChar = null;
+   NodeChar mEndChar = null;
+
+
+   public void printCacheChar() {
+      mValuesChar.forEach((k, v) -> System.out.println("key: " + k + " value: " + v.value));
+      System.out.println("");
+
+      NodeChar node = mHeadChar;
+      while(node != null) {
+         System.out.println("key: " + node.key + " value: " + node.value);
+         node = node.next;
+      }
+
+   }
+
+   private void setHead(Node n) {
       n.next = mHead;
       n.previous = null;
 
@@ -55,7 +77,7 @@ public class LRUCache {
    }
 
    
-   public void remove(Node n) {
+   private void remove(Node n) {
        if(n.previous != null) {
            n.previous.next = n.next;
        }
@@ -93,16 +115,87 @@ public class LRUCache {
            mValues.put(key, node);
        }
    }
-   
-   private class Node {
-      int mKey;
-      int mValue;
-      Node next;
-      Node previous;
+
+   public void set(char key, char value) {
+      NodeChar n = new NodeChar(key, value);
+      if(mValuesChar.size() >= MAX_CAPACITY) {
+         NodeChar temp = mEndChar;
+         mHeadChar = mHeadChar.next;
+         mHeadChar.prev = null;
+         mEndChar.next = n;
+         mEndChar = n;
+         mEndChar.prev = temp;
+
+         mValuesChar.remove(temp.key);
+      }
+      else {
+         if(mHeadChar == null) {
+            mHeadChar = n;
+            mEndChar = mHeadChar;
+         }
+         else if(mEndChar == mHeadChar) {
+            mEndChar = n;
+            mHeadChar.next = mEndChar;
+            mEndChar.prev = mHeadChar;
+         }
+         else {
+            NodeChar temp = mEndChar;
+            mEndChar.next = n;
+            mEndChar = n;
+            mEndChar.prev = temp;
+         }
+      }
+
+      mValuesChar.put(key, n);
+   }
+
+    /**
+     * Get cache value based on the key. If key does not exist, return '\u0000'
+     *
+     * @param key
+     * @return value or '\u0000' if element does not exist.
+     */
+    public char get(char key) {
+       if(mValuesChar.containsKey(key)) {
+          NodeChar n = mValuesChar.get(key);
+          n.prev.next = n.next;
+          n.next.prev = n.prev;
+
+          NodeChar temp = mEndChar;
+          mEndChar.next = n;
+          mEndChar = n;
+          mEndChar.prev = temp;
+          mEndChar.next = null;
+
+          return  n.value;
+       }
+       else {
+          return Character.MIN_VALUE;
+       }
+    }
+
+    private class Node {
+       int mKey;
+       int mValue;
+       Node next;
+       Node previous;
       
       public Node(int k, int v) {
          mKey = k;
          mValue = v;
       }
+   }
+
+   private class NodeChar {
+       char key;
+       char value;
+       NodeChar next;
+       NodeChar prev;
+
+       public NodeChar(char k, char v) {
+          key = k;
+          value = v;
+          next = prev = null;
+       }
    }
 }
