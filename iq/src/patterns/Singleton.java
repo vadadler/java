@@ -44,3 +44,5 @@ enum EnumElvis {
     System.out.println("EnumElvis:Long live the king!");
   }
 }
+
+//
