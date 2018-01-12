@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * https://en.wikipedia.org/wiki/Tower_of_Hanoi
- * The minimum number of moves required to solve a Tower of Hanoi puzzle is 2n - 1, 
+ * The minimum number of moves required to solve a Tower of Hanoi puzzle is 2^n - 1,
  * where n is the number of disks
  *
  * Three rods are A (from), B (temp) and C(to)

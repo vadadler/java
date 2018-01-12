@@ -1,15 +1,17 @@
 package co;
 
 import java.util.Arrays;
+import java.util.HashSet;
 
 public class Google {
 	public static void main(String[] args) {
 		Google g = new Google();
 		
 		//2sum
-		int[] arr2 = {2,4,5,7,9,11};
+		int[] arr2 = {2,4,5,9,7,11};
 		int sum2 = 12;
 		g.twoSum(arr2, sum2);
+		g.twoSumUnsorted(arr2, sum2);
 		
 		//3sum
 		int[] arr3 = {8,2,1,5,7,6,11};
@@ -27,7 +29,7 @@ public class Google {
 	 * (start) and the other in the end (end). If the sum of the current two numbers 
 	 * is greater than S, we move the end pointer backward by one step. If the sum 
 	 * is smaller than S, we move the start pointer forward by one step.
-	 * When the two pointers meet each other, we know that no two numbers sum up to S. 
+	 * When the two pointers meet each other, we know that no two numbers sum up to S.
 	 * The reason we can make it O(N) is that the array is sorted and we don’t need to 
 	 * check all the combinations.
 	 */
@@ -54,8 +56,36 @@ public class Google {
 		
 		System.out.println("2sum not found: array " + Arrays.toString(arr) + " to find sum=" + sum);
 	}
-	
-	
+
+	/**
+	 * Given an unsorted array find 2 numbers that sum to S.
+    *
+	 * The idea here is while walking array at each iteration store compliment to the current value as a set. Compliment is a
+	 * difference between S and current value. When visiting an element search set for its compliment. If found, the sum
+	 * is found.
+	 */
+	private void twoSumUnsorted(int[] arr, int sum) {
+		HashSet<Integer> compliments = new HashSet<Integer>();
+
+		System.out.println("Find sum=" + sum + " in array " + Arrays.toString(arr));
+
+		int index = 0;
+
+		while(index < arr.length - 1) {
+			int compliment = sum - arr[index];
+			compliments.add(compliment);
+
+			if(compliments.contains(arr[index]) == true) {
+				System.out.println("2sum unsorted found: " + arr[index] + "+" + compliment + "=" + sum);
+				return;
+			}
+
+			index++;
+		}
+
+		System.out.println("2sum unsorted not found: array " + Arrays.toString(arr) + " to find sum=" + sum);
+	}
+
 	/**
 	 * Determine if any 3 integers in an array sum to S.
 	 * @param arr input array
