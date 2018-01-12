@@ -19,6 +19,9 @@ public class Google {
 		g.threeSumBruteForce(arr3, sum3);
 		g.threeSumOptimal(arr3, sum3);
 		g.threeSumClosest(arr3, sum3);
+
+		// Find first duplicate character.
+		g.findFirstDuplicate("ADCBED");
 	}
 	
 
@@ -204,5 +207,26 @@ public class Google {
 				return;
 			}
 		}
+	}
+
+	/**
+	 * Given a string find first duplicate character.
+	 * "DABFAB" -> 'A' is the first duplicate.
+	 */
+	private void findFirstDuplicate(String src) {
+		HashSet<Character> characters = new HashSet<Character>();
+
+		for(int i = 0; i < src.length(); i++) {
+			char ch = src.toCharArray()[i];
+
+			if(characters.contains(ch)) {
+				System.out.println(ch + " is the first duplicate character in " + src);
+				return;
+			}
+
+			characters.add(ch);
+		}
+
+		System.out.println("No duplicate characters found.");
 	}
 }
