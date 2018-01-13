@@ -12,7 +12,7 @@ public class Duplicates {
 		
 		Duplicates d = new Duplicates();
 		System.out.println("Original array: " + Arrays.toString(a));
-		System.out.println("Duplicates: Using 2 HasSets : " + d.duplicates2HashSets(a));
+		System.out.println("Duplicates: Using 2 HashSets : " + d.duplicates2HashSets(a));
 		System.out.println("Duplicates: Using sort array : " + d.duplicatesSortArray(a));
 	}
 	
