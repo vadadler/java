@@ -14,13 +14,13 @@ public class RotateArray {
    private void rotate(int[] arr, int k) {
       System.out.println("Before rotate:" + Arrays.toString(arr));
 
-      int j = arr.length - 1;
+      int last = arr.length - 1;
 
       for(int i = 0; i < k; i++) {
          int temp = arr[i];
-         arr[i] = arr[j];
+         arr[i] = arr[last];
 
-         for(int ii = i + k; ii < j; ii++) {
+         for(int ii = i + k; ii <= last; ii++) {
             int temp2 = arr[ii];
             arr[ii] = temp;
             temp = temp2;
