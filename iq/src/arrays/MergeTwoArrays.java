@@ -26,7 +26,7 @@ public class MergeTwoArrays {
 	 * @return merged array.
 	 */
 	private int[] mergeSorted(int[] a, int[] b) {
-		// Create a bigger arry which can hold both a and b arrays.
+		// Create a bigger array which can hold both a and b arrays.
 		int ret[] = new int[a.length + b.length];
 		
 		// Copy arr a into ret.

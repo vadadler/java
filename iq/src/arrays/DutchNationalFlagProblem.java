@@ -50,7 +50,7 @@ public class DutchNationalFlagProblem {
     * Example:
     * Array before sorting: [1, 0, 2, 1, 2, 1, 0]
     * Array after sorting: [0, 0, 1, 1, 1, 2, 2]
-    * 
+    *
     * @param arr
     */
    private void dnf(int[] arr) {

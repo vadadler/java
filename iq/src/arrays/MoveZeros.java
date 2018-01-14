@@ -10,17 +10,14 @@ import java.util.Arrays;
  */
 public class MoveZeros {
 	public static void main(String[] args) {
-		int[] arr1 = {0,2,0,4,3};
-		int[] arr2 = {0,2,0,4,3};
+		int[] arr1 = {0,2,0,4,3,0};
+		int[] arr2 = {0,2,0,4,3,0};
 		
 		System.out.println("Original array: " + Arrays.toString(arr1));
 		
 		MoveZeros mz = new MoveZeros();
 		mz.moveZerosBack(arr1);
 		mz.moveZerosFront(arr2);
-		
-		System.out.println("Moved zeros back: " + Arrays.toString(arr1));
-		System.out.println("Moved zeros front: " + Arrays.toString(arr2));
 	}
 	
 	/**
@@ -29,7 +26,9 @@ public class MoveZeros {
 	 */
 	private void moveZerosBack(int[] arr) {
 		int i = 0, j = 0;
-		
+
+      System.out.println("Moving zeros back");
+
 		// By the end of this loop all not-0 values will be at the front
 		// of the array. Value of i will tell how may 0 to add to the end
 		// of the array.
@@ -40,23 +39,28 @@ public class MoveZeros {
 			else {
 				arr[i++] = arr[j++];
 			}
+			System.out.println(Arrays.toString(arr) + " i=" + i + " j=" + j);
 		}
 		
 		// Fill the rest with 0s.
 		while(i < arr.length) {
 			arr[i++] = 0;
 		}
+
+      System.out.println("Moved zeros back: " + Arrays.toString(arr));
 	}
 	
 	/**
-	 * Similar to moveZerosBack maintain two pointers.
+	 * Similar to moveZerosFront maintain two pointers.
 	 * The difference is to start from the end of array 
 	 * and decrement pointers while walking the array.
 	 */
 	private void moveZerosFront(int[] arr) {
 		int i = arr.length - 1;
 		int j = i;
-		
+
+      System.out.println("Moving zeros in front");
+
 		while(j >= 0) {
 			if(arr[j] == 0) {
 				j--;
@@ -64,10 +68,13 @@ public class MoveZeros {
 			else {
 				arr[i--] = arr[j--]; 
 			}
+         System.out.println(Arrays.toString(arr)  + " i=" + i + " j=" + j);
 		}
 		
 		while(i >= 0) {
 			arr[i--] = 0;
 		}
+
+      System.out.println("Moved zeros front: " + Arrays.toString(arr));
 	}
 }
