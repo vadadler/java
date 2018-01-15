@@ -12,8 +12,8 @@ package threading;
 public class Deadlock {
   public static void main(String[] args) {
     AppDeadlock app = new AppDeadlock();
-    //app.deadlock();
-    app.noDeadlock();
+    app.deadlock();
+    //app.noDeadlock();
   }
 
 }
