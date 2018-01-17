@@ -2,6 +2,7 @@ package puzzles;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EnumMap;
 
 /**
  * A very hungry rabbit is placed in the center of of a garden, represented by a rectangular N x M 2D matrix.
@@ -24,9 +25,11 @@ import java.util.Arrays;
  * Take a reductionist approach: divide problem into smaller ones.
  *
  * 1. Find where rabbit should start.
+ * 2. Start eating.
  */
 public class HungryRabbit {
    private int[][] garden;
+   private int carrotsConsumed;
 
    public HungryRabbit() {
       garden = new int[4][5];
@@ -60,14 +63,107 @@ public class HungryRabbit {
       HungryRabbit hr = new HungryRabbit();
       int[] start = hr.findStart();
 
-      //System.out.println(Arrays.deepToString(hr.garden));
       for(int i = 0; i < hr.garden.length; i++) {
-         System.out.println(Arrays.toString(hr.garden[i]));
+         for(int j = 0; j < hr.garden[0].length; j++) {
+            System.out.print(" " + hr.garden[i][j]);
+         }
+         System.out.println();
       }
 
       System.out.println("Start: " + Arrays.toString(start));
+
+      hr.eat(start);
+
+      // Cells with -1s represent rabbit's path.
+      for(int i = 0; i < hr.garden.length; i++) {
+         for(int j = 0; j < hr.garden[0].length; j++) {
+            System.out.print(" " + hr.garden[i][j]);
+         }
+         System.out.println();
+      }
+
    }
 
+   private void eat(int[] start) {
+      carrotsConsumed += garden[start[0]][start[1]];
+      garden[start[0]][start[1]] = -1; // Already visited parcel. No carrots!
+      Parcel parcel = findNextParcel(start);
+      if (parcel != null) {
+         eat(new int[]{parcel.row, parcel.col});
+      }
+   }
+
+   Parcel findNextParcel(int[] start) {
+      Parcel leftParcel = getParcel(new int[]{start[0], start[1] - 1});
+      Parcel rightParcel = getParcel(new int[]{start[0], start[1] + 1});
+      Parcel topParcel = getParcel(new int[]{start[0] - 1, start[1]});
+      Parcel bottomParcel = getParcel(new int[]{start[0] + 1, start[1]});
+
+      int maxValue = 0;
+      int nextParcel = -1; //-1 - no parcels left, 0 - leftParcel, 1 - rightParcel, 2 - topParcel, 3 - bottomParcel.
+
+      if(leftParcel != null) {
+         maxValue = leftParcel.value;
+         nextParcel = 0;
+      }
+
+      if(rightParcel != null && rightParcel.value > maxValue) {
+         maxValue = rightParcel.value;
+         nextParcel  = 1;
+      }
+
+      if(topParcel != null && topParcel.value > maxValue) {
+         maxValue = topParcel.value;
+         nextParcel  = 2;
+      }
+
+      if(bottomParcel != null && bottomParcel.value > maxValue) {
+         maxValue = bottomParcel.value;
+         nextParcel  = 3;
+      }
+
+      if(nextParcel >= 0) {
+         Parcel p = null;
+
+         switch (nextParcel) {
+            case 0:
+               p = leftParcel;
+               break;
+            case 1:
+               p = rightParcel;
+               break;
+            case 2:
+               p = topParcel;
+               break;
+            case 3:
+               p = bottomParcel;
+               break;
+         }
+         if(p.value >= 0) {
+            return p;
+         }
+      }
+      return null;
+   }
+
+
+   private Parcel getParcel(int[] coordinates) {
+      if ((coordinates[0] >= 0 && coordinates[0] <= garden.length - 1) &&
+            (coordinates[1] >= 0 && coordinates[1] <= garden[0].length)) {
+         int value = garden[coordinates[0]][coordinates[1]];
+         if(value == -1) return null;
+         return new Parcel(coordinates[0], coordinates[1], value);
+      }
+      else {
+         return null;
+      }
+
+   }
+   /**
+    * Find where rabbit will start.
+    *
+    * @return
+    */
    private int[] findStart() {
       int row = -1, col = -1;
       int row1 = -1, col1 = -1, row2 = -1, col2 = -1;
@@ -122,7 +218,10 @@ public class HungryRabbit {
 
    }
 
-   // Represents cell in the matrix.
+   /**
+    * Helper object. Represents cell in the matrix.
+    */
+
    class Parcel {
       private int row;
       private int col;
