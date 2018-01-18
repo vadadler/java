@@ -1,5 +1,7 @@
 package strings;
 
+import java.util.Arrays;
+
 /**
  * Print all permutations of a string.
  *
@@ -7,10 +9,16 @@ package strings;
 public class Permutations {
 
   public static void main(String[] args) {
-    perm("", "abc");
+    Permutations p = new Permutations();
+    p.perm("", "abc");
+
+    String one = "abc", two = "cab";
+
+    System.out.println("is " + one + " a permutation of " + two +  " ? " + isPermutation(one, two));
+
   }
     
-  public static void perm(String prefix, String str) {
+  private void perm(String prefix, String str) {
   	System.out.println(prefix + ":" + str);
   	
     int len = str.length();
@@ -22,6 +30,20 @@ public class Permutations {
         perm(prefix + str.charAt(i), str.substring(0, i) + str.substring(i+1, len));
       }
     }
+  }
+
+  /**
+   * Given two strings write a method which decides if one string is a permutation of another.
+   */
+  static boolean isPermutation(String one, String two) {
+    if(one.length() != two.length()) return false;
+
+    char[] aOne = one.toCharArray();
+    char[] aTwo = two.toCharArray();
+
+    Arrays.sort(aOne);
+    Arrays.sort(aTwo);
+    return Arrays.compare(aOne, aTwo) == 0;
   }
 }
 
