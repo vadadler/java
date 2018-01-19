@@ -12,38 +12,54 @@ package puzzles;
  * Complexity: O(2^n)
  */
 public class NBitsToStrings {
-  static int[] arr;
-  public static void main(String[] args) {
-    int n = 2;
-    arr = new int[n];
-    nBitsString(n);
-    printBinary(3, "");
-  }
-  
-  private static void nBitsString(int n) {
-    if(n <= 0) {
-      System.out.println(java.util.Arrays.toString(arr));
-    }
-    else {
-      arr[n-1] = 0;
-      nBitsString(n-1);
-      arr[n-1] = 1;
-      nBitsString(n-1);
-    }
-  }
+   static int[] arr;
+
+   public static void main(String[] args) {
+      int n = 2;
+      arr = new int[n];
+//      nBitsString(n);
+//      printBinary(3, "");
+      printDecimal(2, "");
+   }
+
+   private static void nBitsString(int n) {
+      if (n <= 0) {
+         System.out.println(java.util.Arrays.toString(arr));
+      } else {
+         arr[n - 1] = 0;
+         nBitsString(n - 1);
+         arr[n - 1] = 1;
+         nBitsString(n - 1);
+      }
+   }
 
    /**
     * Print every binary number that has exactly the given number or digits.
+    *
     * @param n
     * @param prefix
     */
-  private static void printBinary(int n, String prefix){
-     if(n == 0) {
-        System.out.println(prefix);
-     }
-     else {
-        printBinary(n - 1, prefix + "0");
-        printBinary(n-1, prefix + "1");
-     }
-  }
+   private static void printBinary(int n, String prefix) {
+      System.out.println("printBinary(" + n + ", " + prefix + ")");
+      if (n == 0) {
+         System.out.println(prefix);
+      } else {
+         printBinary(n - 1, prefix + "0");
+         printBinary(n - 1, prefix + "1");
+      }
+   }
+
+   /**
+    * Print all decimal (base 10) numbers that has exacly the same number of digits.
+    */
+   private static void printDecimal(int n, String prefix) {
+      System.out.println("printDecimal(" + n + ", " + prefix + ")");
+      if (n == 0) {
+         System.out.println(prefix);
+      } else {
+         for (int i = 0; i < 10; i++) {
+            printDecimal(n - 1, prefix + i);
+         }
+      }
+   }
 }
