@@ -15,12 +15,14 @@ public class Palindrome {
 	static String str2 = "Borrow or robb?";
 	
 	public static void main(String[] args) {
-		System.out.println("Is \"" + str1 + "\" palindrome? " + isPalindrome(str1));
-		System.out.println("Is \"" + str2 + "\" palindrome? " + isPalindrome(str2));
-		
-		System.out.println("Is \"" + str1 + "\" palindrome? " + isPalindromeWithStack(str1));
-		System.out.println("Is \"" + str2 + "\" palindrome? " + isPalindromeWithStack(str2));
-		
+//		System.out.println("Is \"" + str1 + "\" palindrome? " + isPalindrome(str1));
+//		System.out.println("Is \"" + str2 + "\" palindrome? " + isPalindrome(str2));
+//
+//		System.out.println("Is \"" + str1 + "\" palindrome? " + isPalindromeWithStack(str1));
+//		System.out.println("Is \"" + str2 + "\" palindrome? " + isPalindromeWithStack(str2));
+
+		System.out.println("Is \"" + str1 + "\" palindrome? " + isPalindromeRecursion(str1.replaceAll("\\W","").toLowerCase()));
+		System.out.println("Is \"" + str2 + "\" palindrome? " + isPalindromeRecursion(str2.replaceAll("\\W","").toLowerCase()));
 	}
 	
 	/**
@@ -69,5 +71,27 @@ public class Palindrome {
 		}
 		
 		return true;
+	}
+
+	/**
+	 * Approach #3, use recursion.
+	 * @param src
+	 * @return
+	 */
+	private static boolean isPalindromeRecursion(String src) {
+		System.out.println("isPalindromeRecursion(" + src + ")");
+
+		if(src.length() == 1 || src.length() == 0) {
+			return true;
+		}
+		else if(src.length() >= 1) {
+			if (src.charAt(0) == src.charAt(src.length() - 1)) {
+				return isPalindromeRecursion(src.substring(1, src.length() - 1));
+			}
+			else {
+				return false;
+			}
+		}
+		return false;
 	}
 }

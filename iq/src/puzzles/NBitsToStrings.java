@@ -50,7 +50,7 @@ public class NBitsToStrings {
    }
 
    /**
-    * Print all decimal (base 10) numbers that has exacly the same number of digits.
+    * Print all decimal (base 10) numbers that has exactly the same number of digits.
     */
    private static void printDecimal(int n, String prefix) {
       System.out.println("printDecimal(" + n + ", " + prefix + ")");
