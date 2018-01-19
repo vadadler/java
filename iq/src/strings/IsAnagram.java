@@ -46,7 +46,8 @@ public class IsAnagram {
 		// Sort arrays of chars.
 		Arrays.sort(sa1);
 		Arrays.sort(sa2);
-		
+
+
 		System.out.println(Arrays.toString(sa1) + " " + Arrays.toString(sa2));
 		return Arrays.equals(sa1, sa2);
 	}

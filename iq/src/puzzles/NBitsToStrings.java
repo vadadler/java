@@ -17,6 +17,7 @@ public class NBitsToStrings {
     int n = 2;
     arr = new int[n];
     nBitsString(n);
+    printBinary(3, "");
   }
   
   private static void nBitsString(int n) {
@@ -29,5 +30,20 @@ public class NBitsToStrings {
       arr[n-1] = 1;
       nBitsString(n-1);
     }
+  }
+
+   /**
+    * Print every binary number that has exactly the given number or digits.
+    * @param n
+    * @param prefix
+    */
+  private static void printBinary(int n, String prefix){
+     if(n == 0) {
+        System.out.println(prefix);
+     }
+     else {
+        printBinary(n - 1, prefix + "0");
+        printBinary(n-1, prefix + "1");
+     }
   }
 }

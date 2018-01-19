@@ -38,8 +38,8 @@ public class Permutations {
   static boolean isPermutation(String one, String two) {
     if(one.length() != two.length()) return false;
 
-    char[] aOne = one.toCharArray();
-    char[] aTwo = two.toCharArray();
+    char[] aOne = one.toLowerCase().toCharArray();
+    char[] aTwo = two.toLowerCase().toCharArray();
 
     Arrays.sort(aOne);
     Arrays.sort(aTwo);
